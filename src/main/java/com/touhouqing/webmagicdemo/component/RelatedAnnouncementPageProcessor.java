@@ -69,13 +69,46 @@ public class RelatedAnnouncementPageProcessor implements PageProcessor {
      * 提取标题
      */
     private String extractTitle(String htmlContent) {
-        // 方法1：从title标签获取
+        // 方法1：从meta标签的ArticleTitle中提取
+        Pattern metaTitlePattern = Pattern.compile("name=\"ArticleTitle\"\\s+content=\"([^\"]+)\"");
+        Matcher metaTitleMatcher = metaTitlePattern.matcher(htmlContent);
+        if (metaTitleMatcher.find()) {
+            String title = metaTitleMatcher.group(1).trim();
+            return cleanHtmlContent(title);
+        }
+
+        // 方法2：查找页面中的主标题（通常在h1、h2标签或特定位置）
+        Pattern mainTitlePattern = Pattern.compile("([^\\n\\r<>]{10,100}政府采购意向公告)");
+        Matcher mainTitleMatcher = mainTitlePattern.matcher(htmlContent);
+        if (mainTitleMatcher.find()) {
+            String title = mainTitleMatcher.group(1).trim();
+            return cleanHtmlContent(title);
+        }
+
+        // 方法3：查找包含"意向公告"的标题
+        Pattern intentionPattern = Pattern.compile("([^\\n\\r<>]{10,100}意向公告)");
+        Matcher intentionMatcher = intentionPattern.matcher(htmlContent);
+        if (intentionMatcher.find()) {
+            String title = intentionMatcher.group(1).trim();
+            return cleanHtmlContent(title);
+        }
+
+        // 方法4：从title标签获取
         Pattern titleTagPattern = Pattern.compile("<title[^>]*>([^<]+)</title>");
         Matcher titleTagMatcher = titleTagPattern.matcher(htmlContent);
         if (titleTagMatcher.find()) {
             String title = titleTagMatcher.group(1).trim();
             return cleanHtmlContent(title);
         }
+
+        // 方法5：查找页面中的任何包含"公告"的标题
+        Pattern generalTitlePattern = Pattern.compile("([^\\n\\r<>]{10,100}公告)");
+        Matcher generalTitleMatcher = generalTitlePattern.matcher(htmlContent);
+        if (generalTitleMatcher.find()) {
+            String title = generalTitleMatcher.group(1).trim();
+            return cleanHtmlContent(title);
+        }
+
         return "";
     }
 
