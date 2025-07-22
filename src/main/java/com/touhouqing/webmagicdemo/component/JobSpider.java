@@ -1,6 +1,7 @@
 package com.touhouqing.webmagicdemo.component;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Request;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.scheduler.Scheduler;
@@ -8,6 +9,7 @@ import us.codecraft.webmagic.scheduler.Scheduler;
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class JobSpider {
 
     @Autowired
