@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.touhouqing.webmagicdemo.mapper.AnnouncementInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.touhouqing.webmagicdemo.entity.AnnouncementInfo">
+        <id column="id" property="id" />
+        <result column="project_number" property="projectNumber" />
+        <result column="project_name" property="projectName" />
+        <result column="purchase_unit" property="purchaseUnit" />
+        <result column="budget_amount" property="budgetAmount" />
+        <result column="max_price" property="maxPrice" />
+        <result column="publish_date" property="publishDate" />
+        <result column="publish_source" property="publishSource" />
+        <result column="detail_url" property="detailUrl" />
+        <result column="title" property="title" />
+        <result column="contract_period" property="contractPeriod" />
+        <result column="procurement_requirements" property="procurementRequirements" />
+        <result column="contact_info" property="contactInfo" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, project_number, project_name, purchase_unit, budget_amount, max_price, 
+        publish_date, publish_source, detail_url, title, contract_period, 
+        procurement_requirements, contact_info
+    </sql>
+
+</mapper>
